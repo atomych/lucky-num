@@ -14,6 +14,16 @@
   user-select: none;
 }
 
+@keyframes anim {
+  from {
+    text-shadow: 0 0 10px #fff;
+  }
+
+  to {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+}
+
 body {
   width: 100%;
   height: 100vh;
@@ -36,6 +46,8 @@ body {
   text-shadow: 0 0 5px #fff;
 
   margin-bottom: 50px;
+
+  animation: anim 0.5s linear infinite;
 }
 
 .container.random {
