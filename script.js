@@ -1,7 +1,9 @@
 const displayRandom = () => document.querySelector(".random").style.display = "flex";
 const displayForm = () => document.querySelector(".form").style.display = "flex";
+const displayBtns = () => document.querySelector(".btns").style.opacity = "1";
 const hideRandom = () => document.querySelector(".random").style.display = "none";
 const hideForm = () => document.querySelector(".form").style.display = "none";
+const hideBtns = () => document.querySelector(".btns").style.opacity = "0";
 
 const minNumInput = document.querySelector(".input--min");
 const maxNumInput = document.querySelector(".input--max");
@@ -9,7 +11,7 @@ const numberOutput = document.querySelector(".number");
 
 const clearMinInput = () => minNumInput.value = "";
 const clearMaxInput = () => maxNumInput.value = "";
-const clearNumberOutput = () => numberOutput.textContent = "";
+const clearNumberOutput = () => numberOutput.textContent = " ";
 
 const randomBtn = document.querySelector(".btn--random");
 const retryBtn = document.querySelector(".icon--retry");
@@ -28,18 +30,32 @@ const validInput = (input) => {
   }
 };
 
-const generateNum = () => {
+const startRandom = () => {
   const min = minNumInput.value;
   const max = maxNumInput.value;
 
-  if (max == "" || min == "" || min >= max) return;
+  if (min == "" || max == "" || +min >= +max) return;
 
-  const newNum = getRandomNumber(+min, +max);
+  const numbers = [];
+
+  for (let count = 0; count < 20; count++) {
+    const num = getRandomNumber(+min, +max);
+    numbers.push(num);
+  }
 
   hideForm();
   displayRandom();
-  writeNumOutput(newNum);
-};
+  hideBtns();
+
+  for (let count = 0; count < 20; count++) {
+    setTimeout(() => {
+      writeNumOutput(numbers[count]);
+      if (count == 19) {
+        setTimeout(displayBtns, 2100);
+      }
+    }, 200*count);
+  }
+}
 
 const returnToForm = () => {
   hideRandom();
@@ -49,6 +65,6 @@ const returnToForm = () => {
 
 minNumInput.addEventListener("input", () => validInput(minNumInput));
 maxNumInput.addEventListener("input", () => validInput(maxNumInput));
-randomBtn.addEventListener("click", generateNum);
+randomBtn.addEventListener("click", startRandom);
 homeBtn.addEventListener("click", returnToForm);
-retryBtn.addEventListener("click", generateNum)
+retryBtn.addEventListener("click", startRandom);

@@ -47,7 +47,7 @@ body {
 
   margin-bottom: 50px;
 
-  animation: anim 0.5s linear infinite;
+  animation: anim 1s linear infinite;
 }
 
 .container.random {
@@ -58,6 +58,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: all 0.3s linear;
 }
 
 .icon {
